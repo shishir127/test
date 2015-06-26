@@ -1,0 +1,5 @@
+include_recipe 'test::base'
+include_recipe 'test::users'
+include_recipe 'test::rails_stack'
+include_recipe 'test::web_server'
+include_recipe 'test::database'

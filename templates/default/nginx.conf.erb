@@ -1,0 +1,10 @@
+server {
+    listen: 80;
+    server_name  sahai;
+
+    access_log /var/log/nginx/localhost.access.log;
+
+    location / {
+        proxy_pass http://localhost:8080;
+    }
+}

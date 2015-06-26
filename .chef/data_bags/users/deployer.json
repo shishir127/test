@@ -1,0 +1,11 @@
+{
+  "id": "deployer",
+  "password": "$1$Y2fN6Xf2$gjpv7Wfvx.bzGlUcBX8Dw1",
+  "groups": [
+    "sysadmin"
+  ],
+  "shell": "\/bin\/bash",
+  "action": "create",
+  "comment": "C42 DevOps Application Deployer",
+  "email": "work@c42.in"
+}
