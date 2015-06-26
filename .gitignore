@@ -18,3 +18,5 @@ bin/*
 
 .kitchen/
 .kitchen.local.yml
+templates/default/database.yml.erb
+templates/default/secrets.yml.erb

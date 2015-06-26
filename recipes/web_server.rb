@@ -1,5 +1,14 @@
 include_recipe 'nginx'
 
+#get nginx source
+
+script "build nginx" do
+  action run
+  script :bash
+  attribute { user: node[:sahai][:username] }
+  code nginx_tcp_proxy_setup.erb
+end
+
 file '/etc/nginx/conf.d/default.conf' do
   action :delete
 end

@@ -1,0 +1,12 @@
+echo 'deb http://ppa.launchpad.net/nginx/stable/ubuntu trusty main' > /etc/apt/sources.list.d/nginx-stable-trusty.list
+echo 'deb-src http://ppa.launchpad.net/nginx/stable/ubuntu trusty main' > /etc/apt/sources.list.d/nginx-stable-trusty.list
+sudo apt-get update
+sudo apt-get install -y dpkg-dev
+sudo mkdir /opt/rebuildnginx
+cd /opt/rebuildnginx
+sudo apt-get source nginx
+sudo apt-get build-dep nginx
+cd /opt/rebuildnginx/nginx-1.6.2
+sudo dpkg-buildpackage -b
+cd /opt/rebuildnginx
+sudo dpkg --install nginx-full_1.6.2-5+trusty0_amd64.deb
