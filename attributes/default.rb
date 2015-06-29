@@ -40,3 +40,6 @@ default[:unicorn][:worker_processes] = 2
 default[:unicorn][:before_fork] = 'sleep 1'
 default[:unicorn][:port] = '8080'
 default[:unicorn][:config_file] = "#{node[:sahai][:project_home]}/config/unicorn.rb"
+
+#build-essential
+default['build-essential']['compile_time'] = true

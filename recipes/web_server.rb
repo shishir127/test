@@ -1,12 +1,18 @@
-include_recipe 'nginx'
+# include_recipe 'nginx'
 
-#get nginx source
+template "/tmp/nginx_tcp_proxy_setup.sh" do
+  source "nginx_tcp_proxy_setup"
+  mode "0754"
+end
 
-script "build nginx" do
-  action run
-  script :bash
-  attribute { user: node[:sahai][:username] }
-  code nginx_tcp_proxy_setup.erb
+template "/tmp/nginx_build_flag_editor.rb" do
+  source "nginx_build_flag_editor.rb"
+  mode "0754"
+end
+
+bash "build nginx" do
+  action :run
+  code "/tmp/nginx_tcp_proxy_setup.sh"
 end
 
 file '/etc/nginx/conf.d/default.conf' do
