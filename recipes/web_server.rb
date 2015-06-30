@@ -1,4 +1,4 @@
-# include_recipe 'nginx'
+include_recipe 'nginx'
 
 template "/tmp/nginx_tcp_proxy_setup.sh" do
   source "nginx_tcp_proxy_setup"

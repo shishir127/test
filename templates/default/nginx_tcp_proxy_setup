@@ -1,3 +1,4 @@
+sudo apt-get -y remove nginx nginx-core nginx-common nginx-full
 touch /etc/apt/sources.list.d/nginx-stable-trusty.list
 echo "deb http://ppa.launchpad.net/nginx/stable/ubuntu trusty main" >> "/etc/apt/sources.list.d/nginx-stable-trusty.list"
 echo "deb-src http://ppa.launchpad.net/nginx/stable/ubuntu trusty main" >> "/etc/apt/sources.list.d/nginx-stable-trusty.list"
@@ -15,4 +16,5 @@ patch -p1 < ../nginx_tcp_proxy_module/tcp.patch
 cd /opt/rebuildnginx/nginx-1.8.0
 sudo dpkg-buildpackage -b
 cd /opt/rebuildnginx
+sudo dpkg --install nginx-common_1.8.0-1+trusty1_all.deb
 sudo dpkg --install nginx-full_1.8.0-1+trusty1_amd64.deb
