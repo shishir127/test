@@ -1,0 +1,46 @@
+tcp {
+
+        upstream cluster {
+            # simple round-robin
+            server 127.0.0.1:4000;
+
+            check interval=3000 rise=2 fall=5 timeout=1000;
+
+            #check interval=3000 rise=2 fall=5 timeout=1000 type=ssl_hello;
+
+            #check interval=3000 rise=2 fall=5 timeout=1000 type=http;
+            #check_http_send "GET / HTTP/1.0\r\n\r\n";
+            #check_http_expect_alive http_2xx http_3xx;
+        }
+
+        server {
+            listen 5000;
+
+            proxy_pass cluster;
+        }
+    }
+
+upstream app {
+    # Path to Unicorn SOCK file, as defined previously
+    server unix:/var/www/sahai-web/current/tmp/unicorn.sahai-web.sock fail_timeout=0;
+}
+
+server {
+    listen 80;
+    server_name sahai;
+
+    root /var/www/sahai-web/current/public;
+
+    try_files $uri/index.html $uri @app;
+
+    location @app {
+        proxy_pass http://app;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+    }
+
+    error_page 500 502 503 504 /500.html;
+    client_max_body_size 4G;
+    keepalive_timeout 10;
+}

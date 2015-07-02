@@ -1,0 +1,20 @@
+sudo apt-get -y remove nginx nginx-core nginx-common nginx-full
+touch /etc/apt/sources.list.d/nginx-stable-trusty.list
+echo "deb http://ppa.launchpad.net/nginx/stable/ubuntu trusty main" >> "/etc/apt/sources.list.d/nginx-stable-trusty.list"
+echo "deb-src http://ppa.launchpad.net/nginx/stable/ubuntu trusty main" >> "/etc/apt/sources.list.d/nginx-stable-trusty.list"
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 00A6F0A3C300EE8C
+sudo apt-get -y update
+sudo apt-get -y install -y dpkg-dev
+sudo mkdir /opt/rebuildnginx
+cd /opt/rebuildnginx
+sudo apt-get -y source nginx
+sudo apt-get -y build-dep nginx
+ruby <%= node[:sahai][:web_server][:flag_editor_location] %>
+git clone https://github.com/yaoweibin/nginx_tcp_proxy_module.git
+cd /opt/rebuildnginx/nginx-1.8.0/
+patch -p1 < ../nginx_tcp_proxy_module/tcp.patch
+cd /opt/rebuildnginx/nginx-1.8.0
+sudo dpkg-buildpackage -b
+cd /opt/rebuildnginx
+sudo dpkg --install nginx-common_1.8.0-1+trusty1_all.deb
+sudo dpkg --install nginx-full_1.8.0-1+trusty1_amd64.deb
