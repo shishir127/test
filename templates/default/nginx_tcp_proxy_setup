@@ -9,7 +9,7 @@ sudo mkdir /opt/rebuildnginx
 cd /opt/rebuildnginx
 sudo apt-get -y source nginx
 sudo apt-get -y build-dep nginx
-ruby nginx_build_flag_editor.rb
+ruby <%= node[:sahai][:web_server][:flag_editor_location] %>
 git clone https://github.com/yaoweibin/nginx_tcp_proxy_module.git
 cd /opt/rebuildnginx/nginx-1.8.0/
 patch -p1 < ../nginx_tcp_proxy_module/tcp.patch

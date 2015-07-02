@@ -10,10 +10,10 @@ template "/tmp/nginx_build_flag_editor.rb" do
   mode "0754"
 end
 
-bash "build nginx" do
-  action :run
-  code "/tmp/nginx_tcp_proxy_setup.sh"
-end
+# bash "build nginx" do
+#   action :run
+#   code "/tmp/nginx_tcp_proxy_setup.sh"
+# end
 
 file '/etc/nginx/conf.d/default.conf' do
   action :delete
