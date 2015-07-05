@@ -1,5 +1,5 @@
 chef_server_url   'http://127.0.0.1:8889'
-node_name         'sahai'
+node_name         'test'
 client_key        '/etc/chef/dummy.pem'
 chef_zero.enabled true
 local_mode        true

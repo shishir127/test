@@ -2,6 +2,8 @@ include_recipe "postgresql::client"
 include_recipe "postgresql::server"
 include_recipe "database::postgresql"
 
+gem_package "pg"
+
 postgresql_connection_info = {
     host:     node[:sahai][:database][:host],
     port:     node[:sahai][:database][:port],

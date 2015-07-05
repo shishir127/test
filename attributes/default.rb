@@ -31,7 +31,7 @@ default[:sahai][:database][:pool_size]                   = 5
 default[:sahai][:database][:username]                    = 'sahai'
 default[:sahai][:database][:password]                    = 'lettersdeebee'
 default[:sahai][:secret_key_base]                        = '8fe6592eadce6428aa538db9597f68c0b12b5e6faf626af9beb64ffc78e6bc7b149056541d4ad02aed417ba51d38c145b2dc40e4166d1a94d8aeaa052ea41196'
-default[:sahai][:ruby][:version]                         = '2.1.5'
+default[:sahai][:ruby][:version]                         = '2.2.0'
 default[:sahai][:web_server][:flag_editor_location]      = '/tmp/nginx_build_flag_editor.rb'
 default[:sahai][:web_server][:build_scipt_location]      = '/tmp/nginx_tcp_proxy_setup.sh'
 
@@ -42,6 +42,7 @@ default[:unicorn][:worker_processes] = 2
 default[:unicorn][:before_fork] = 'sleep 1'
 default[:unicorn][:port] = '8080'
 default[:unicorn][:config_file] = "#{node[:sahai][:project_home]}/config/unicorn.rb"
+default[:unicorn][:options] = { :tcp_nodelay => true, :backlog => 100 }
 
 #build-essential
 default['build-essential']['compile_time'] = true
