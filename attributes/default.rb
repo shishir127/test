@@ -43,7 +43,3 @@ default[:unicorn][:before_fork] = 'sleep 1'
 default[:unicorn][:port] = '8080'
 default[:unicorn][:config_file] = "#{node[:sahai][:project_home]}/config/unicorn.rb"
 default[:unicorn][:options] = { :tcp_nodelay => true, :backlog => 100 }
-
-#build-essential
-default['build-essential']['compile_time'] = true
-default['apt']['compile_time_update'] = true
